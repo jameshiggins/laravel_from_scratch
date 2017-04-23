@@ -10,15 +10,20 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
 
-    $tasks = [
+    $tasks = DB::table('tasks')->latest()->get();
 
-        'goto store',
-        'eat lunch',
-        'buy pie'
-
-    ];
     return view('welcome', compact('tasks'));
 });
+
+Route::get('/tasks/{id}', function ($id) {
+
+
+    $tasks = DB::table('tasks')->find($id);
+//    dd($tasks);
+    return view('tasks.show', compact('tasks'));
+
+
+});
+
