@@ -9,7 +9,7 @@
 </head>
 <body>
 
-{{ $tasks->body }}
+{{ $task->body }}
 
 </body>
 </html>
