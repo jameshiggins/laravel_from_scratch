@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Post;
+
 class PostsController extends Controller
 {
     public function index()
@@ -23,10 +25,21 @@ class PostsController extends Controller
 
     public function store()
     {
-        $post = new \App\Post;
-        $post->title = request('title');
-        $post->body = request('body');
-        $post->save();
+        $post = new Post;
+//        $post->title = request('title');
+//        $post->body = request('body');
+//        $post->save();
+
+       Post::create([
+
+            'title'=> request('title'),
+            'body' => request('body')
+
+
+        ]);
+
+
+
         return redirect('/');
     }
 }
