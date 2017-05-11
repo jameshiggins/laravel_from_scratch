@@ -10,12 +10,19 @@ class PostsController extends Controller
 {
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::latest()->get();
+
+//        dd($posts);
+        return view('posts.index', compact('posts'));
+
     }
 
-    public function show()
+    public function show(Post $post)
     {
-        return view('posts.show');
+//        $post = Post::find($id);
+
+//        dd($posts);
+        return view('posts.show', compact('post'));
     }
 
     public function create()
@@ -30,14 +37,13 @@ class PostsController extends Controller
 //        $post->body = request('body');
 //        $post->save();
 
-       Post::create([
+        Post::create([
 
-            'title'=> request('title'),
-            'body' => request('body')
+            'title' => request('title'),
+            'body'  => request('body')
 
 
         ]);
-
 
 
         return redirect('/');
