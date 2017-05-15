@@ -31,11 +31,13 @@
             <!--<label for="title">title</label>-->
             <!--<input type="text" name="title" class="form-control" id="title">-->
             <!--</div>-->
+            <!--$if(count($errors))-->
             <div class="form-group">
                 <label for="body">body</label>
-                <textarea class="form-control" placeholder="comment here" id="body" name="body"></textarea>
+                <textarea required class="form-control" placeholder="comment here" id="body" name="body"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add comment</button>
+            <!--@endif-->
         </form>
     </div>
 </div>

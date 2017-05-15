@@ -15,6 +15,10 @@
             <textarea class="form-control" id="body" name="body"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">publish</button>
+        @if(count($errors))
+            @include('partials.errors')
+        @endif
     </form>
+
 </div>
 @endsection
