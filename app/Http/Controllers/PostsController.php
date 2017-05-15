@@ -32,7 +32,7 @@ class PostsController extends Controller
 
     public function store()
     {
-        $post = new Post;
+//        $post = new Post;
 //        $post->title = request('title');
 //        $post->body = request('body');
 //        $post->save();
