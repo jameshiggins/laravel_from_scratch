@@ -8,7 +8,7 @@
     <h4>comments</h4>
     <div class="comments">
         <ul class="list-group">
-        @foreach ($post->comments as $comment)
+            @foreach ($post->comments as $comment)
 
             <div class="list-group-item">
                 <strong>{{$comment->created_at->diffForHumans() }}</strong><br>
@@ -17,6 +17,26 @@
         </ul>
 
         @endforeach
+    </div>
+
+    <!--add a comment-->
+    <hr>
+    <div class="card">
+
+        <div class="card-block"></div>
+        <form method="POST" action="/posts/{{$post->id}}/comments">
+
+            {{csrf_field()}}
+            <!--<div class="form-group">-->
+            <!--<label for="title">title</label>-->
+            <!--<input type="text" name="title" class="form-control" id="title">-->
+            <!--</div>-->
+            <div class="form-group">
+                <label for="body">body</label>
+                <textarea class="form-control" placeholder="comment here" id="body" name="body"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add comment</button>
+        </form>
     </div>
 </div>
 @endsection
