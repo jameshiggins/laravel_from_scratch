@@ -34,11 +34,13 @@
             <!--$if(count($errors))-->
             <div class="form-group">
                 <label for="body">body</label>
-                <textarea required class="form-control" placeholder="comment here" id="body" name="body"></textarea>
+                <textarea class="form-control" placeholder="comment here" id="body" name="body"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Add comment</button>
-            <!--@endif-->
-        </form>
+            @if(count($errors))
+                @include('partials.errors')
+            @endif
+            </form>
     </div>
 </div>
 @endsection
