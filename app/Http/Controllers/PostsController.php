@@ -8,6 +8,12 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->except([ 'index','show']);
+    }
+
     public function index()
     {
         $posts = Post::latest()->get();
@@ -27,6 +33,7 @@ class PostsController extends Controller
 
     public function create()
     {
+
         return view('posts.create');
     }
 
@@ -40,14 +47,11 @@ class PostsController extends Controller
 
         ]);
 
-        Post::create([
+        auth()->user()->publish(
 
-            'title' => request('title'),
-            'body'  => request('body')
+            new Post(request(['title', 'body']))
 
-
-        ]);
-
+        );
 
         return redirect('/');
     }
