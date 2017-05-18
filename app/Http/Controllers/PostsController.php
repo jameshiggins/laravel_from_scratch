@@ -5,21 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Post;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
 
     public function __construct()
     {
-        $this->middleware('auth')->except([ 'index','show']);
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::latest()
+                     ->filter(request(['month', 'year']))
+                     ->get();
 
-//        dd($posts);
-        return view('posts.index', compact('posts'));
+        $archives = Post::selectRaw('year(created_at) year, monthname(created_at) month, count(*) published')
+                        ->orderByRaw('min(created_at) desc')
+                        ->groupBy('year', 'month')
+                        ->get()
+                        ->toArray();
+
+//dd($posts);
+//        return $archives;
+        return view('posts.index', compact('posts', 'archives'));
+
 
     }
 
@@ -40,10 +51,10 @@ class PostsController extends Controller
     public function store()
     {
 
-        $this->validate(request(),[
+        $this->validate(request(), [
 
             'title' => 'required',
-            'body' => 'required'
+            'body'  => 'required'
 
         ]);
 
