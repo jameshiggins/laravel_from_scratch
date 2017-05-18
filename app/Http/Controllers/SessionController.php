@@ -9,7 +9,7 @@ class SessionController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('guest', ['except' => 'destroy']);
+        $this->middleware('guest', ['except' => 'destroy']);
     }
 
     public function create()
@@ -19,9 +19,15 @@ class SessionController extends Controller
 
     public function store()
     {
-        auth()->attempt(request(['email', 'password']));
+//        dd(request());
+        if(!auth()->attempt(request(['email', 'password']))) {
+
+            return redirect()->back();
+
+        }
 
         return redirect()->home();
+
     }
 
     public function destroy()
