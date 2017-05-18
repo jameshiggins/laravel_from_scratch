@@ -22,7 +22,10 @@ class SessionController extends Controller
 //        dd(request());
         if(!auth()->attempt(request(['email', 'password']))) {
 
-            return redirect()->back();
+            return back()->withErrors([
+                'message' => 'Please check your credentials and try again.'
+            ]);
+//            return redirect()->back();
 
         }
 

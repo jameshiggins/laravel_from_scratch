@@ -3,7 +3,7 @@
 @section('content')
     <div class="col-sm-8 blog-main">
         <h2>sign in</h2>
-        <form action="/login" method="post">
+        <form action="/login" method="POST">
             {{ csrf_field() }}
 
             <div class="form-group">
