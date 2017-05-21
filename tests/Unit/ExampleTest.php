@@ -26,14 +26,21 @@ class ExampleTest extends TestCase
         ]);
 
         $posts = Post::archives();
-//        dd($posts);
+
         $this->assertEquals([
+            [
+                "year"      => $first->created_at->format('Y'),
+                "month"     => $first->created_at->format('F'),
+                "published" => 2
 
-            "year"      => $first->created_at->format('Y'),
-            "month"     => "$first->created_at",
-            "published" => 2
 
+            ],
+            [
+                "year"      => $second->created_at->format('Y'),
+                "month"     => $second->created_at->format('F'),
+                "published" => 2
+            ]
 
-        ]);
+        ], $posts);
     }
 }
