@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers;
+use App\Mail\Welcome;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 class RegistrationController extends Controller
 {
     public function create()
@@ -22,8 +25,12 @@ class RegistrationController extends Controller
             'email' => request('email'),
             'password' => bcrypt(request('password'))
         ]);
+
         // Sign them in
         auth()->login($user);
+
+        Mail::to($user)->send(new Welcome($user));
+
         // Redirect to the home page
         return redirect()->home();
     }

@@ -15,17 +15,16 @@ class PostsController extends Controller
         $this->middleware('auth')->except(['index', 'show']);
     }
 
-    public function index(Posts $posts)
+    public function index()
     {
 
-        dd($posts);
+//        dd($posts);
         $posts = Post::latest()
                      ->filter(request(['month', 'year']))
                      ->get();
 
 //        $archives = Post::archives();
 
-//dd($posts);
 //        return $archives;
         return view('posts.index', compact('posts'));
 

@@ -11,3 +11,5 @@ class Stripe
         $this->key = $key;
     }
 }
+
+
